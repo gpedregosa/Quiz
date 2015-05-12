@@ -9,6 +9,7 @@ footer { background: #eee; text-align: center;}
 nav {
 	width: 130px;
 }
+#ErrorMsgs { color:#f61;font-size: smaler;}
 
 ul {
 	list-style-type: none;
