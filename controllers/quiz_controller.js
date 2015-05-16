@@ -2,7 +2,9 @@ var models = require('../models/models.js');
 // Autoload :id
 exports.load = function(req, res, next, quizId) {
 models.Quiz.find({
-where: {id: Number(quizId)},
+where: {
+id: Number(quizId)
+},
 include: [{
 model: models.Comment
 }]
@@ -14,6 +16,22 @@ next();
 } else{next(new Error('No existe quizId=' + quizId))}
 }
 ).catch(function(error){next(error)});
+};
+// GET /quizes
+exports.index = function(req, res) {
+var query = req.query.search;
+if(query){
+console.log("buscando...");
+models.Quiz.findAll({where:["pregunta like ?", '%' + query + '%']}).then(function(quizes) {
+res.render('quizes', {quizes: quizes, errors: []});
+})
+} else {
+console.log("nada que buscar");
+models.Quiz.findAll().then(
+function(quizes) {
+res.render('quizes/index', {quizes: quizes, errors: []});
+}).catch(function(error){next(error);})
+}
 };
 // GET /quizes/:id
 exports.show = function(req, res) {
@@ -32,21 +50,6 @@ respuesta: resultado,
 errors: []
 }
 );
-};
-// GET /quizes
-exports.index = function(req, res) {
-console.log("GET INDEX");
-var query = req.query.search;
-if(query){
-models.Quiz.findAll({where:["pregunta like ?", '%' + query + '%']}).then(function(quizes) {
-res.render('quizes', {quizes: quizes, errors: []});
-})
-} else {
-models.Quiz.findAll().then(
-function(quizes) {
-res.render('quizes/index', {quizes: quizes, errors: []});
-}).catch(function(error){next(error);})
-}
 };
 // GET /quizes/new
 exports.new = function(req, res) {
@@ -75,13 +78,7 @@ quiz // save: guarda en DB campos pregunta y respuesta de quiz
 // GET /quizes/:id/edit
 exports.edit = function(req, res) {
 var quiz = req.quiz; // req.quiz: autoload de instancia de quiz
-res.render('quizes/edit', {quiz: quiz, errors: []}).catch(function(error) {next(error)});
-};
-// DELETE /quizes/:id
-exports.destroy = function(req, res) {
-req.quiz.destroy().then(function(){
-res.redirect('/quizes');
-}).catch(function(error) {next(error)});
+res.render('quizes/edit', {quiz: quiz, errors: []});
 };
 // PUT /quizes/:id
 exports.update = function(req, res) {
@@ -99,5 +96,11 @@ req.quiz // save: guarda campos pregunta y respuesta en DB
 .then( function(){ res.redirect('/quizes');});
 } // Redirección HTTP a lista de preguntas (URL relativo)
 }
-);
+).catch(function(error) {next(error)});
+};
+// DELETE /quizes/:id
+exports.destroy = function(req, res) {
+req.quiz.destroy().then(function(){
+res.redirect('/quizes');
+}).catch(function(error) {next(error)});
 };

@@ -1,0 +1,5 @@
+mkdir cert
+cd cert
+openssl genrsa -out quiz-gpo-key.pem 2048
+openssl req -new -sha256 -key quiz-gpo-key.pem -out quiz-gpo-csr.pem
+openssl x509 -req -in quiz-gpo-csr.pem -signkey quiz-gpo-key.pem -out quiz-gpo-cert.pem
