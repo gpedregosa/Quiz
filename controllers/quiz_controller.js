@@ -129,7 +129,6 @@ numPregConComments++;
 //calculoEstadisticas(i, numPreguntas, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizes.length-1);
 }
 });
-}
 res.render('quizes/estadisticas', {
 numPreg: numPreg,
 numComments: numComments,
@@ -138,7 +137,7 @@ numPregSinCom: numPregSinCom,
 numPredConComments: numPregConComments,
 errors: []
 });
-
+}
 });
 }).catch(function(error){next(error)});
 /*function calculoEstadisticas(i, numPreg, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizLength){
