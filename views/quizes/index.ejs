@@ -1,4 +1,10 @@
-<table>
+<table style="background: #eee">
+    <tr><td><form style="background: #eee" method="get" action="/quizes">
+    Buscar preguntas:<p style="background: #eee">
+    <input type="text" name="search"/>
+    <input type="submit" value="Buscar">
+</form>
+</td></tr>
 <% var i; for (i=0; i < quizes.length; i++) { %>
 <tr><td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
      <%if(session.user){%>
@@ -19,8 +25,3 @@ borrar
 	<%}%>
     </td></tr>
     </table>
-<form style="background: #eee" method="get" action="/quizes">
-    Buscar preguntas:<p style="background: #eee">
-    <input type="text" name="search"/>
-    <input type="submit" value="Buscar">
-</form>

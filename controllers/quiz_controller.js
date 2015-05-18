@@ -104,3 +104,51 @@ req.quiz.destroy().then(function(){
 res.redirect('/quizes');
 }).catch(function(error) {next(error)});
 };
+
+// GET /quizes/statistics
+exports.statistics = function(req, res){
+// numero de preguntas
+models.Quiz.findAll().then(function(quizes){
+var numPreguntas = quizes.length;
+// Numero de comentarios totales
+models.Comment.findAll().then(function(comments){
+numComments = comments.length;
+//media
+var mediaComPreg = numComments/numPreguntas;
+// numero de preguntas sin comentarios
+var numPregSinCom = 0;
+var numPregConComments = 0;
+for(var i = 0; i<quizes.length; i++){
+quizes[i].getComments().then(function(quizesComment){
+if(quizesComment.length === 0){
+numPregSinCom++;
+calculoEstadisticas(i, numPreguntas, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizes.length-1);
+}
+else{
+numPregConComments++;
+calculoEstadisticas(i, numPreguntas, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizes.length-1);
+}
+});
+}
+
+
+});
+}).catch(function(error){next(error)});
+function calculoEstadisticas(i, numPreg, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizLength){
+if(numPregConComments+numPregSinCom === i){
+console.log(numPreg);
+console.log(numComments);
+console.log(mediaComPreg);
+console.log(numPregSinCom);
+console.log(numPregConComments);
+res.render('quizes/estadisticas', {
+numPreg: numPreg,
+numComments: numComments,
+media: mediaComPreg,
+numPregSinCom: numPregSinCom,
+numPredConComments: numPregConComments,
+errors: []
+});
+}
+};
+}

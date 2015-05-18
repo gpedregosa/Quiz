@@ -40,4 +40,6 @@ router.get('/author', function(req, res) {
     res.render('author', { title: 'Créditos', errors: [] });
 });
 
+router.get('/quizes/statistics', sessionController.autoLogout, quizController.statistics);
+
 module.exports = router;

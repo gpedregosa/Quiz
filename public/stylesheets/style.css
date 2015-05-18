@@ -3,7 +3,7 @@ body { font: 16px Arial, Helvetica, sans-serif; }
 #page-wrap { margin: 2% auto; color: white; }
 #page-wrap > .main { border: 1px solid; padding: 1%;
 margin-bottom: 1px; color: black;}
-section > div { padding: 20px; background: #eee;}
+section { padding: 20px; background: #eee; overflow: scroll;}
 header, nav, section { background: #eee; text-align: center;}
 footer { background: #eee; text-align: center;}
 nav span { margin: 0px 10px 0px 0px;
