@@ -122,25 +122,17 @@ for(var i = 0; i<quizes.length; i++){
 quizes[i].getComments().then(function(quizesComment){
 if(quizesComment.length === 0){
 numPregSinCom++;
-//calculoEstadisticas(i, numPreguntas, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizes.length-1);
+calculoEstadisticas(i, numPreguntas, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizes.length-1);
 }
 else{
 numPregConComments++;
-//calculoEstadisticas(i, numPreguntas, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizes.length-1);
+calculoEstadisticas(i, numPreguntas, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizes.length-1);
 }
-});
-res.render('quizes/estadisticas', {
-numPreg: numPreg,
-numComments: numComments,
-media: mediaComPreg,
-numPregSinCom: numPregSinCom,
-numPredConComments: numPregConComments,
-errors: []
 });
 }
 });
 }).catch(function(error){next(error)});
-/*function calculoEstadisticas(i, numPreg, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizLength){
+function calculoEstadisticas(i, numPreg, numComments, mediaComPreg, numPregSinCom, numPregConComments, quizLength){
 if(numPregConComments+numPregSinCom === i){
 console.log(numPreg);
 console.log(numComments);
@@ -155,6 +147,6 @@ numPregSinCom: numPregSinCom,
 numPredConComments: numPregConComments,
 errors: []
 });
-}*/
+}
 };
 }
