@@ -3,12 +3,12 @@
 <label for="resp" class="rem">Respuesta:</label>
 <input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>"/> <p>
 <label for="cat" class="rem">Categoría:</label>
-<select id="cat" name="quiz[categoria]" value="<%= quiz.categoria %>">
-  <option value="Otro" selected>Otro</option>
-  <option value="Humanidades">Humanidades</option>
-  <option value="Ocio">Ocio</option>
-  <option value="Ciencia">Ciencia</option>
-  <option value="Tecnologia">Tecnología</option>
+<select id="cat" name="quiz[categoria]">
+  <option value="Otro" <% if (quiz.categoria === "Otro") {%>selected<% }%>>Otro</option>
+  <option value="Humanidades" <% if (quiz.categoria === "Humanidades") {%>selected<% }%>>Humanidades</option>
+  <option value="Ocio" <% if (quiz.categoria === "Ocio") {%>selected<% }%>>Ocio</option>
+  <option value="Ciencia" <% if (quiz.categoria === "Ciencia") {%>selected<% }%>>Ciencia</option>
+  <option value="Tecnologia" <% if (quiz.categoria === "Tecnologia") {%>selected<% }%>>Tecnología</option>
 </select>
 <p>
 <a href="/quizes"><button type="button">Cancelar</button></a>

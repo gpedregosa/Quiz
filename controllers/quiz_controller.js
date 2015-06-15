@@ -89,7 +89,7 @@ exports.edit = function(req, res) {
 exports.update = function(req, res) {
     req.quiz.pregunta = req.body.quiz.pregunta;
     req.quiz.respuesta = req.body.quiz.respuesta;
-    req.quiz.categoia = req.body.quiz.categoria;
+    req.quiz.categoria = req.body.quiz.categoria;
     req.quiz.validate().then(
         function(err){
             if (err) {
